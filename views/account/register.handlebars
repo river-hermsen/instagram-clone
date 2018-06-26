@@ -1,0 +1,43 @@
+<form class="ui form signin-form" method="post">
+  {{#if errors}}
+    {{#each errors}}
+      <div class="ui negative message">
+        <i class="close icon"></i>
+        <div class="header">
+          {{msg}}
+        </div>
+      </div>
+    {{/each}}
+  {{/if}}
+  <div class="fields">
+    <div class="field full-width">
+      <label>Full name</label>
+      <input type="text" placeholder="Full name" name="name">
+    </div>
+  </div>
+  <div class="fields field">
+    <div class="field full-width">
+      <label>Username</label>
+      <input type="text" placeholder="Username" name="username">
+    </div>
+  </div>
+  <div class="fields">
+    <div class="field full-width">
+      <label>Email</label>
+      <input type="email" placeholder="Email" name="email">
+    </div>
+  </div>
+  <div class="fields">
+    <div class="field half-width">
+      <label>Password</label>
+      <input type="password" placeholder="Password" name="password">
+    </div>
+    <div class="field half-width">
+      <label>Confirm password</label>
+      <input type="password" placeholder="Confirm password" name="password2">
+    </div>
+  </div>
+  <div class="field">
+    <button class="ui primary button">Register</button>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<form class="form-signin" method="post">
+  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Please enter your new password</h1>
+  {{#if errors}}
+    {{#each errors}}
+      <div class="alert alert-danger" role="alert">
+        {{msg}}
+      </div>
+    {{/each}}
+  {{/if}}
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" autofocus required>
+  <label for="inputPassword" class="sr-only">Confirm password</label>
+  <input type="password" id="inputPassword" class="form-control" placeholder="Confirm password" name="password2" required>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top: 20px;">Reset password</button>
+</form>

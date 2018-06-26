@@ -1,0 +1,225 @@
+<div class="ui mini modal">
+  <div class="header">Change Profile Photo</div>
+  <div class="content">
+    <div class="modal-button">
+      <form action="/myaccount/upload" method="POST" enctype="multipart/form-data">
+        <input name="myImage" type="file">
+        <button type="submit" class="ui primary button right floated" style="margin-top: 16px;">Upload</button>
+      </form>
+    </div>
+    <div class="ui divider" style="margin: 20px auto 20px auto;"></div>
+    <div class="modal-button">
+      <button class="negative ui button">Remove current photo</button>
+    </div>
+    <div class="ui divider" style="margin: 20px auto 20px auto;"></div>
+    <div class="modal-button">
+      <button class="ui button" onclick="hideEditProfileModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<h1>This is your account info: </h1>
+<div class="ui grid">
+  <div class="four wide column">
+    <div class="ui vertical fluid tabular menu">
+      <a class="active item" id="editTab" onclick="changeTab('editTab')">
+        Edit profile
+      </a>
+      <a class="item" id="changepwdTab" onclick="changeTab('changepwdTab')">
+        Change password
+      </a>
+      <a class="item" id="privacyTab" onclick="changeTab('privacyTab')">
+        Privacy and Security
+      </a>
+    </div>
+  </div>
+
+
+  <div class="twelve wide stretched column">
+    <div class="ui segment">
+      <div id="editTabContent">
+        <div class="ui grid">
+          <div class="four wide column">
+            <img src="uploads/profilePicture/{{{user.profilePicture}}}" alt="Profile picture" class="profile-picture">
+          </div>
+          <div class="twelve wide column">
+            <h3>{{{user.username}}}</h3>
+            <a href="#" onclick="showEditProfileModal()">Edit profile photo</a>
+          </div>
+          <form method="post" action="/myaccount/edit" class="full-width">
+            {{#if errors}}
+              {{#each errors}}
+                <div class="ui negative message">
+                  <i class="close icon"></i>
+                  <div class="header">
+                    {{msg}}
+                  </div>
+                </div>
+              {{/each}}
+            {{/if}}
+            <div class="ui grid">
+              <div class="four wide column label-input-myaccount">
+                <h4><label for="nameInput">Name</label></h4>
+              </div>
+              <div class="twelve wide column">
+                <div class="ui input width-90">
+                  <input type="text" placeholder="Name" id="nameInput" value="{{{user.displayName}}}" name="name">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui grid">
+              <div class="four wide column label-input-myaccount">
+                <h4><label for="usernameInput">Username</label></h4>
+              </div>
+              <div class="twelve wide column">
+                <div class="ui input width-90">
+                  <input type="text" value="{{{user.username}}}" id="usernameInput" name="username">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui grid">
+              <div class="four wide column label-input-myaccount">
+                <h4><label for="emailInput">Email</label></h4>
+              </div>
+              <div class="twelve wide column">
+                <div class="ui input width-90">
+                  <input type="email" value="{{{user.emails}}}" id="emailInput" name="email">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui grid">
+              <div class="four wide column label-input-myaccount">
+                <h4><label for="genderInput">Gender</label></h4>
+              </div>
+              <div class="twelve wide column">
+                <div class="ui selection dropdown">
+                  <input type="hidden" name="gender" id="genderInput">
+                  <i class="dropdown icon"></i>
+                  <div class="default text">Gender</div>
+                  <div class="menu">
+
+                    <div class="item" data-value="male">Male</div>
+
+                    <div class="item" data-value="female">Female</div>
+                    <div class="item" data-value="other">Other</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui grid">
+              <div class="four wide column"></div>
+              <div class="four wide column label-input-myaccount">
+                <button type="submit" class="ui primary button" style="margin-bottom: 20px;">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+      <div id="changepwdTabContent" style="display: none;">
+        <div class="ui grid">
+          <div class="four wide column">
+            <img src="uploads/profilePicture/{{{user.profilePicture}}}" alt="Profile picture" class="profile-picture">
+          </div>
+          <div class="twelve wide column">
+            <h3>{{{user.username}}}</h3>
+          </div>
+
+          <div class="four wide column label-input-myaccount">
+            <h4><label for="oldPwdInput">Old password</label></h4>
+          </div>
+          <div class="twelve wide column">
+            <div class="ui input width-90">
+              <input type="password" placeholder="Old password" id="oldPwdInput">
+            </div>
+          </div>
+
+          <div class="four wide column label-input-myaccount">
+            <h4><label for="newPwdInput">New password</label></h4>
+          </div>
+          <div class="twelve wide column">
+            <div class="ui input width-90">
+              <input type="password" placeholder="New password" id="newPwdInput">
+            </div>
+          </div>
+
+          <div class="four wide column label-input-myaccount">
+            <h4><label for="confNewPwdInput">Confirm new password</label></h4>
+          </div>
+          <div class="twelve wide column">
+            <div class="ui input width-90">
+              <input type="password" placeholder="Confirm new password" id="confNewPwdInput">
+            </div>
+          </div>
+
+          <div class="four wide column"></div>
+          <div class="twelve wide column label-input-myaccount">
+            <button class="ui primary button">
+              Change password
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="privacyTabContent" style="display: none;">
+        <div class="">
+          <h2>Account Privacy</h2>
+          <div class="ui checkbox">
+            <input type="checkbox" name="privatAccount">
+            <label>Private Account</label>
+          </div>
+        </div>
+        <div class="ui divider" style="max-width: 535px !important; margin: 20px auto 20px auto;"></div>
+        <div class="">
+          <h2>Two-Factor Authentication</h2>
+          <div class="ui checkbox">
+            <input type="checkbox" name="privatAccount">
+            <label>Enable Two-Factor Authentication</label>
+          </div>
+        </div>
+        <div class="ui divider" style="max-width: 535px !important; margin: 20px auto 20px auto;"></div>
+        <div class="">
+          <button class="ui primary button right floated">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function changeTab(tab) {
+    var itemActive = $('.item').hasClass('.active');
+    if ($('#editTab').hasClass('active')) {
+      $('#editTabContent').css("display", "none");
+      $('#editTab').removeClass('active');
+    } else if ($('#changepwdTab').hasClass('active')) {
+      $('#changepwdTabContent').css("display", "none");
+      $('#changepwdTab').removeClass('active');
+    } else if ($('#privacyTab').hasClass('active')) {
+      $('#privacyTabContent').css("display", "none");
+      $('#privacyTab').removeClass('active');
+    }
+
+    $('#' + tab).addClass("active");
+    $('#' + tab + 'Content').css("display", "block");
+  }
+
+  $('.ui.dropdown').dropdown();
+
+  function showEditProfileModal() {
+    $('.mini.modal').modal('show');
+  }
+
+  function hideEditProfileModal() {
+    $('.mini.modal').modal('hide');
+  }
+</script>

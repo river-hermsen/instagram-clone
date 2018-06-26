@@ -1,0 +1,99 @@
+body {
+  background-color: #FFFFFF;
+}
+
+.ui.menu .item img.logo {
+  margin-right: 1.5em;
+}
+
+.inner-container {
+  width: 100%;
+}
+
+.nav-dropdown-item {
+  font-size: 0.8em !important;
+}
+
+.nav-brand {
+  float: left;
+}
+
+.nav-profile {
+  float: right;
+}
+
+.nav-search {
+  float: right;
+}
+
+.nav-search .input {
+  padding-top: 3px !important;
+}
+
+.main.container {
+  margin-top: 7em;
+}
+
+.wireframe {
+  margin-top: 2em;
+}
+
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 5em 0em;
+}
+
+.signin-form {
+  max-width: 450px !important;
+  margin: 0 auto;
+}
+
+.signin-field {
+  width: 100%;
+}
+
+.sigin-btn-field {
+  width: 70%;
+}
+
+.sigin-btn {
+  float: right;
+}
+
+.forgot-btn-field {
+  width: 100%;
+}
+
+.forgot-btn {
+  margin-top: 20px !important;
+  float: right;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.label-input-myaccount {
+  display: flex !important;
+  align-items: center;
+}
+
+.width-90 {
+  width: 90%;
+}
+
+.modal-button {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.profile-picture {
+  float: right;
+  width: 70px;
+}
