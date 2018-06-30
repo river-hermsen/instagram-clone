@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Login app</title>
+  <title>Instgram clone</title>
+  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -17,56 +18,61 @@
     <div class="ui container">
       <div class="inner-container">
         <a href="/" class="header item nav-brand">
-          <img class="logo" src="https://seeklogo.com/images/I/instagram-logo-A807AD378B-seeklogo.com.png">
-          Instagram
+          <img class="logo" src="/uploads/website/instagram-logo.png">
+          <img class="logo" src="/uploads/website/instagram-text.png" style="
+          width: 6em;
+          margin-top: 1px;
+          ">
         </a>
         {{#if user}}
-          <div class="ui simple dropdown nav-profile header item">
-            <i class="far fa-user fa-lg"></i><i class="dropdown icon"></i>
-            <div class="menu">
-              <a class="item nav-dropdown-item" href="/myaccount">My Account</a>
-              <a class="item nav-dropdown-item" href="/account/logout">Logout</a>
-            </div>
+        <div class="ui simple dropdown nav-profile header item">
+          <i class="far fa-user fa-lg"></i><i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item nav-dropdown-item" href="/myaccount">My Account</a>
+            <a class="item nav-dropdown-item" href="/account/logout">Logout</a>
           </div>
-          <div class="header item nav-search ">
-            <div class="ui icon input">
-              <input type="text" placeholder="Search...">
-              <i class="search icon"></i>
-            </div>
+        </div>
+        <div class="header item nav-search ">
+          <div class="ui icon input">
+            <input type="text" placeholder="Search...">
+            <i class="search icon"></i>
           </div>
+        </div>
         {{/if}}
       </div>
     </div>
   </div>
 
 
-  <div class="ui main text container">
+  <div class="ui main container">
     {{#if success_msg}}
-      <div class="ui success message">
-        <i class="close icon"></i>
-        <div class="header">
-          {{success_msg}}
-        </div>
+    <div class="ui success message">
+      <i class="close icon"></i>
+      <div class="header">
+        {{success_msg}}
       </div>
+    </div>
     {{/if}}
 
     {{#if error_msg}}
-      <div class="ui negative message">
-        <i class="close icon"></i>
-        <div class="header">
-          {{error_msg}}
-        </div>
+    <div class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header">
+        {{error_msg}}
       </div>
+    </div>
     {{/if}}
 
     {{#if error}}
-      <div class="ui negative message">
-        <i class="close icon"></i>
-        <div class="header">
-          {{error}}
-        </div>
+    <div class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header">
+        {{error}}
       </div>
+    </div>
     {{/if}}
+
+
     {{{body}}}
   </div>
 

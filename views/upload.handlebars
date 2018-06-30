@@ -1,0 +1,77 @@
+<div class="ui grid">
+  <div class="ui sixteen wide column">
+    <h2>Preview:</h2>
+  </div>
+  <div class="ui ten wide column preview-upload">
+    <div class="ui card item-feed">
+      <div class="content">
+        <div class="right floated meta">14h</div>
+        <img class="ui avatar image" src="/uploads/profilePicture/{{user.profilePicture}}">
+        <a href="/user/:id" class="item-header-user-link">{{user.username}}</a>
+      </div>
+      <div class="image">
+        <!-- <img src="/uploads/photos/061.jpg" alt="" class="img-feed" id="previewUploadImg"> -->
+        <img alt="" class="item-img" id="previewUploadImg" style="min-width: 690px; min-height: 690px;">
+      </div>
+      <div class="content">
+        <span class="right floated">
+          <i class="comment icon"></i>
+          ? comments
+        </span>
+        <i class="heart outline like icon"></i> ?? likes
+        <div class="item-comments">
+          <div class="item-comment" style="display: none;" id="descriptionPreviewBox">
+            <a href="/user/:id" class="item-comment-user-link"><b>kanye._ye</b></a>
+            <p class="item-comment-text" id="descriptionPreviewText"></p>
+          </div>
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="ui large transparent left icon input">
+          <i class="comment outline icon"></i>
+          <input type="text" placeholder="Add Comment...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui six wide column">
+    <div class="ui raised fluid text container segment">
+      <form class="ui form" method="POST" enctype="multipart/form-data">
+        <div class="field">
+          <label for="imgInput">Image</label>
+          <input type="file" name="img" id="imgInput" accept="image/*" onchange="previewImg(event)" required>
+        </div>
+        <div class="field">
+          <label for="descriptionInput">Description</label>
+          <input type="text" name="description" placeholder="Description" id="descriptionInput" required>
+        </div>
+        <div class="field">
+          <button type="submit" name="button" class="ui button primary">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function previewImg(img) {
+    var output = document.getElementById('previewUploadImg');
+    output.style = '';
+    output.src = URL.createObjectURL(img.target.files[0]);
+  }
+
+  $("#descriptionInput").on("change paste keyup", function() {
+    var input = $('#descriptionInput');
+    var outputBox = $('#descriptionPreviewBox');
+    var outputText = $('#descriptionPreviewText');
+    if (!input.val()) {
+      console.log('yeysysy empty');
+      outputBox.css("display", "none");
+    } else {
+      outputBox.removeAttr('style');
+    }
+
+    outputText.text(input.val());
+  });
+</script>

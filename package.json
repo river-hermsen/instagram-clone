@@ -4,7 +4,7 @@
   "description": "Simple authentication system",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -e js,md,css,handlebars ./app.js",
+    "start": "nodemon -e js,md,css,handlebars --inspect-brk ./app.js ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,6 +13,7 @@
     "bcryptjs": "*",
     "body-parser": "*",
     "connect-flash": "*",
+    "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.1",
     "dotenv": "^6.0.0",
     "express": "*",

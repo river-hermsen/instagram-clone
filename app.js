@@ -13,46 +13,19 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/instagram');
 var db = mongoose.connection;
+var MongoStore = require('connect-mongo')(session);
 
 //routes
 var routes = require('./routes/index');
 var account = require('./routes/account');
 var myaccount = require('./routes/myaccount');
+var user = require('./routes/user');
 
 //init app
 var app = express();
 
 //view engine
-var hbs = exphbs.create({
-  helpers: {
-    xIF: function(v1, operator, v2, options) {
-      switch (operator) {
-        case '==':
-          return (v1 == v2) ? options.fn(this) : options.inverse(this);
-        case '===':
-          return (v1 === v2) ? options.fn(this) : options.inverse(this);
-        case '!=':
-          return (v1 != v2) ? options.fn(this) : options.inverse(this);
-        case '!==':
-          return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-        case '<':
-          return (v1 < v2) ? options.fn(this) : options.inverse(this);
-        case '<=':
-          return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-        case '>':
-          return (v1 > v2) ? options.fn(this) : options.inverse(this);
-        case '>=':
-          return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-        case '&&':
-          return (v1 && v2) ? options.fn(this) : options.inverse(this);
-        case '||':
-          return (v1 || v2) ? options.fn(this) : options.inverse(this);
-        default:
-          return options.inverse(this);
-      }
-    }
-  }
-});
+var hbs = exphbs.create();
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({
@@ -74,7 +47,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'secret',
   saveUninitialized: true,
-  resave: true
+  resave: true,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  })
 }));
 
 // Passport init
@@ -113,6 +89,7 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/account', account);
+app.use('/user', user);
 app.use('/', myaccount);
 
 // Set Port

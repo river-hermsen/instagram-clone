@@ -1,3 +1,110 @@
 <div class="main">
   <h1 class="display-4" style="margin-top: 20px;">This is your feed, {{{user.displayName}}}.</h1>
+  <div class="main-feed">
+    <div class="ui grid">
+      <div class="twelve wide column">
+        <div class="ui card item-feed">
+          <div class="content">
+            <div class="right floated meta">14h</div>
+            <img class="ui avatar image" src="/uploads/profilePicture/1530035584151-myImage.jpg">
+            <a href="/user/:id" class="item-header-user-link">kanye._ye</a>
+          </div>
+          <div class="image">
+            <img src="/uploads/photos/061.jpg" alt="" class="img-feed">
+          </div>
+          <div class="content">
+            <span class="right floated">
+              <i class="comment icon"></i>
+              3 comments
+            </span>
+            <i class="heart outline like icon"></i> 17 likes
+            <div class="item-comments">
+              <div class="item-comment">
+                <a href="/user/:id" class="item-comment-user-link"><b>kanye._ye</b></a>
+                <p class="item-comment-text">This was a picture I took in the forest</p>
+              </div>
+              <div class="item-comment">
+                <a href="/user/:id" class="item-comment-user-link"><b>riverhermsen</b></a>
+                <p class="item-comment-text">Wow so nice!</p>
+              </div>
+              <div class="item-comment">
+                <a href="/user/:id" class="item-comment-user-link"><b>kanye._ye</b></a>
+                <p class="item-comment-text">@riverhermsen Thanks!</p>
+              </div>
+            </div>
+          </div>
+          <div class="extra content">
+            <div class="ui large transparent left icon input">
+              <i class="comment outline icon"></i>
+              <input type="text" placeholder="Add Comment...">
+            </div>
+          </div>
+        </div>
+        {{#each photos}}
+          <div class="ui card item-feed">
+            <div class="content">
+              <div class="right floated meta">14h</div>
+              <img class="ui avatar image" src="/uploads/profilePicture/{{this.userInfo.profilePicture}}">
+              <a href="/user/:id" class="item-header-user-link">{{this.userInfo.username}}</a>
+            </div>
+            <div class="image">
+              <img src="/uploads/photos/{{this.infoPhoto.filename}}" alt="" class="img-feed">
+            </div>
+            <div class="content">
+              <span class="right floated">
+                <i class="comment icon"></i>
+                3 comments
+              </span>
+              <i class="heart outline like icon"></i> 17 likes
+              <div class="item-comments" id="comment-section-{{this._id}}">
+                <div class="item-comment" id="description">
+                  <a href="/user/:id" class="item-comment-user-link"><b>{{this.userInfo.username}}</b></a>
+                  <p class="item-comment-text">{{this.infoPhoto.description}}</p>
+                </div>
+                {{#each this.likesAndComments.comments}}
+                  <div class="item-comment">
+                    <a href="/user/:id" class="item-comment-user-link"><b>{{this.username}}</b></a>
+                    <p class="item-comment-text">{{this.comment}}</p>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+            <div class="extra content">
+              <form class="addComment" data-photoid="{{this._id}}">
+                <div class="ui large transparent left icon input">
+                  <i class="comment outline icon"></i>
+                  <input type="text" placeholder="Add Comment..." name="comment">
+                </div>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+      <div class="four wide column">
+        <a href="/upload">Upload your photo</a>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  // this is the id of the form
+  $(".addComment").submit(function(e) {
+    e.preventDefault();
+    var photoId = e.target.dataset.photoid;
+    var url = "/add/comment/" + photoId;
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: $(this).serialize(),
+      success: function(data) {
+        console.log(data);
+        $(this).reset();
+        $("#comment-section-" + photoId).append('<div class="item-comment"> \
+          <a href="/user/' + data.userId + '" class="item-comment-user-link"><b>' + data.username +'</b></a> \
+          <p class="item-comment-text">' + data.comment +'</p> \
+        </div>');
+      }
+    });
+  });
+</script>
